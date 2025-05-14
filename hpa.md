@@ -6,33 +6,25 @@ This guide documents how to deploy the Shopper app (with frontend, admin, and ba
 
 ## 📁 Project Structure
 
-
-shopper/
-├── admin/          # Admin frontend (port 5174)
-├── frontend/       # User frontend (port 5173)
-├── backend/        # Backend API (port 5050)
-├── k8s/            # YAML files
-│   ├── backend-deployment.yaml
-│   ├── backend-service.yaml
+shopper-app/
+├── frontend/
+│   ├── Dockerfile
+│   └── (frontend source code)
+├── backend/
+│   ├── Dockerfile
+│   └── (backend source code)
+├── k8s/
 │   ├── frontend-deployment.yaml
+│   ├── backend-deployment.yaml
 │   ├── frontend-service.yaml
-│   ├── admin-deployment.yaml
-│   ├── admin-service.yaml
-│   ├── hpa.yaml
-│   └── load-generator.yaml
-└── .env
+│   ├── backend-service.yaml
+│   ├── hpa-backend.yaml
+│   └── hpa-frontend.yaml
+
 
 
 ---
 
-## ⚙ .env File
-
-Make sure the backend uses the correct environment variables:
-
-env
-PORT=5050
-MONGO_URI=mongodb+srv://savalkaranjali6:0PWoqbtNNbiCmaIK@cluster0.kny7zzh.mongodb.net/e-commerce
-JWT_SECRET=secret_ecom
 
 
 ---
@@ -44,6 +36,14 @@ minikube start
 
 
 ---
+docker login
+cd frontend
+docker build -t <your-dockerhub-username>/shopper-frontend:latest .
+docker push <your-dockerhub-username>/shopper-frontend:latest
+cd ../backend
+docker build -t <your-dockerhub-username>/shopper-backend:latest .
+docker push <your-dockerhub-username>/shopper-backend:latest
+
 
 ## 🐳 Build Docker Images
 
