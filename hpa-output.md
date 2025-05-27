@@ -439,6 +439,50 @@ If you need to access the backend API directly for testing:
    
    Then access via: http://localhost:5050
 
+   #or
+
+---
+
+## 🧩 Step 1: Forward the Frontend Service (Port 5173)
+
+```bash
+kubectl port-forward service/shopper-frontend-service 5173:5173
+````
+
+🖥️ Now open in your browser: [http://localhost:5173](http://localhost:5173)
+
+---
+
+## 🧩 Step 2: Forward the Admin Service (Port 5174)
+
+Open a **new terminal** and run:
+
+```bash
+kubectl port-forward service/shopper-admin-service 5174:5174
+```
+
+🖥️ Now open in your browser: [http://localhost:5174](http://localhost:5174)
+
+---
+
+## 🧩 Step 3: (Optional) Check Backend Service (Port 5050)
+
+The backend is exposed as a `ClusterIP` and is only accessible inside the cluster by default.
+
+To test it locally, run:
+
+```bash
+kubectl port-forward service/shopper-backend-service 5050:5050
+```
+
+🖥️ Test backend APIs at: [http://localhost:5050](http://localhost:5050)
+
+
+
+```
+
+
+
 ## Step 8: Test the Autoscaler with Example Outputs
 
 Let's test the Horizontal Pod Autoscaling with detailed examples:
