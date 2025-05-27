@@ -155,7 +155,9 @@ todo-app-hpa   Deployment/todo-app       0%/70%    2         10        2        
 Get the URL to access your Todo app:
 
 ```bash
-minikube service todo-app-service --url
+minikube service todo-app-service --url   or
+kubectl port-forward service/todo-service 8080:80
+
 ```
 
 Or open it directly in your browser:
