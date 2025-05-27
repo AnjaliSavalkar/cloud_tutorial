@@ -539,9 +539,16 @@ Example output:
 / #
 ```
 
-Then generate CPU load:
+Then generate CPU load for admin service:
 ```bash
-/ # while true; do :; done
+/ #   while true; do wget -q -O- http://shopper-admin-service:5174 > /dev/null; done 
+```
+This will run an infinite loop, consuming CPU resources.
+Then generate CPU load for frontend service:
+```bash
+/ #  while true; do
+  wget -q -O- http://shopper-frontend-service:5173 >/dev/null 2>&1
+done   
 ```
 This will run an infinite loop, consuming CPU resources.
 
